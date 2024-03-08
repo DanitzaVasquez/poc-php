@@ -1,0 +1,59 @@
+name: EXAMEN CI
+
+on:
+#Eventos
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+#Jobs
+jobs:
+  testing:
+  #version de Ubuntu 20.4
+  #Runner
+    runs-on: ubuntu-latest
+    env:
+      GO_VERSION: 20.4
+    
+    #Steps
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go ${{ env.GO_VERSION }} 
+        uses: actions/checkout@v3
+        with:
+          go-version: ${{ env.GO_VERSION }} 
+        
+        # Version de PHP
+      - name: Setup PHP
+        uses: actions/setup-php
+        with: 
+          php-version: 8.2
+
+      - name: Install Dependencies
+        run: go mod download
+
+      - name: Test
+        run: go test -v ./...
+
+      - name: Run build
+        run: go build -v ./...
+      # instalar composer
+      - name: Install Composer Dependencies
+        run: composer install
+      # composer test all
+      - name: Run Tests
+        run: composer test-all
+      #Linter
+      - name: Run Linter
+        run: composer lint-code
+
+      - name: Notify Success to Slack
+        if: success()
+        uses: rtCamp/action-slack-notify@v2
+        with:
+          status: 'passed'
+          text: 'Go CI successfully.'
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
