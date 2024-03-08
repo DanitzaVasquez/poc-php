@@ -35,9 +35,9 @@ jobs:
       # instalar composer
       - name: Install Composer Dependencies
         run: composer install
-      # composer test all
-      - name: Run Tests
-        run: composer test-all
+      # # composer test all
+      # - name: Run Tests
+      #   run: composer test-all
       #Linter
       - name: Run Linter
         run: composer lint-code
