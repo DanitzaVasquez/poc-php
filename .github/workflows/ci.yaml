@@ -27,7 +27,7 @@ jobs:
         
         # Version de PHP
       - name: Setup PHP
-        uses: actions/setup-php
+        uses: actions/setup-php@v2
         with: 
           php-version: 8.2
 
