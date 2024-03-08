@@ -12,9 +12,7 @@ jobs:
   testing:
   #version de Ubuntu 20.4
   #Runner
-    runs-on: ubuntu-latest
-    env:
-      GO_VERSION: 20.4
+    runs-on: ubuntu-20.04
     
     #Steps
     steps:
