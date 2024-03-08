@@ -27,7 +27,7 @@ jobs:
         
         # Version de PHP
       - name: Setup PHP
-        uses: shivammathur/setup-php@v5
+        uses: shivammathur/setup-php@v7.2
         with: 
           php-version: 8.2
 
