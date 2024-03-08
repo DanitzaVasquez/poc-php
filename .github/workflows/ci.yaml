@@ -32,14 +32,6 @@ jobs:
           php-version: 8.2
           extensions: imagick, swoole
 
-      - name: Install Dependencies
-        run: go mod download
-
-      - name: Test
-        run: go test -v ./...
-
-      - name: Run build
-        run: go build -v ./...
       # instalar composer
       - name: Install Composer Dependencies
         run: composer install
